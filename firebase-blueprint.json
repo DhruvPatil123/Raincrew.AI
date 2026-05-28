@@ -1,0 +1,173 @@
+{
+  "entities": {
+    "Campaign": {
+      "title": "Campaign",
+      "description": "Represents an active recruitment campaign with candidate evaluation settings",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "department": { "type": "string" },
+        "description": { "type": "string" },
+        "experience": { "type": "string" },
+        "questions": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "candidateCount": { "type": "integer" },
+        "weights": {
+          "type": "object",
+          "properties": {
+            "technical": { "type": "integer" },
+            "architecture": { "type": "integer" },
+            "communication": { "type": "integer" }
+          }
+        },
+        "voiceSex": { "type": "string", "enum": ["male", "female"] },
+        "sttEngine": { "type": "string", "enum": ["deepgram", "assemblyai", "whisper"] },
+        "enableMediaPipeCameraProctor": { "type": "boolean" },
+        "gdprConsentTextOverride": { "type": "string" }
+      },
+      "required": ["id", "title", "department", "description", "questions", "createdAt"]
+    },
+    "Candidate": {
+      "title": "Candidate",
+      "description": "Represents a candidate applying for a campaign, with assessment metrics and transcripts",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "campaignId": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "status": { "type": "string", "enum": ["Pending", "In-Progress", "Completed", "Evaluated"] },
+        "appliedDate": { "type": "string", "format": "date-time" },
+        "duration": { "type": "string" },
+        "score": { "type": "integer" },
+        "overallEvaluation": { "type": "string" },
+        "fitCategory": { "type": "string", "enum": ["Hire", "Shortlist", "Reject"] },
+        "strengths": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "weaknesses": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "transcript": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "speaker": { "type": "string", "enum": ["AI", "Candidate"] },
+              "text": { "type": "string" },
+              "timestamp": { "type": "string" }
+            }
+          }
+        },
+        "detailedScores": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "criteria": { "type": "string" },
+              "score": { "type": "integer" },
+              "maxScore": { "type": "integer" },
+              "feedback": { "type": "string" }
+            }
+          }
+        },
+        "qnaPairs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "question": { "type": "string" },
+              "answer": { "type": "string" },
+              "rating": { "type": "integer" },
+              "feedback": { "type": "string" }
+            }
+          }
+        },
+        "consentAgreedTime": { "type": "string", "format": "date-time" },
+        "gdprCompliantMode": { "type": "boolean" },
+        "tabSwitchCount": { "type": "integer" },
+        "longSilenceCount": { "type": "integer" },
+        "suspiciousVoiceNoise": { "type": "boolean" },
+        "spokenLanguage": { "type": "string" },
+        "deliveryMetrics": {
+          "type": "object",
+          "properties": {
+            "fillerWords": { "type": "object" },
+            "totalFillers": { "type": "integer" },
+            "wpm": { "type": "integer" },
+            "clarityLevel": { "type": "string", "enum": ["Excellent", "Good", "Moderate", "Needs Improvement"] },
+            "overallPacing": { "type": "string" }
+          }
+        }
+      },
+      "required": ["id", "campaignId", "name", "email", "status", "appliedDate", "duration", "score", "overallEvaluation"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "Log entry tracking events and interactions within the recruitment workspace",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "action": { "type": "string" },
+        "details": { "type": "string" },
+        "operator": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "action", "details", "operator", "timestamp"]
+    },
+    "Branding": {
+      "title": "Branding",
+      "description": "Branding parameters for the recruitment workspace UI",
+      "type": "object",
+      "properties": {
+        "logoUrl": { "type": "string" },
+        "companyName": { "type": "string" },
+        "primaryColor": { "type": "string" },
+        "gdprText": { "type": "string" }
+      }
+    },
+    "RecruiterNote": {
+      "title": "RecruiterNote",
+      "description": "Notes associated with a specific candidate written by recruiters",
+      "type": "object",
+      "properties": {
+        "candidateId": { "type": "string" },
+        "notes": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["candidateId", "notes"]
+    }
+  },
+  "firestore": {
+    "/campaigns/{campaignId}": {
+      "schema": "Campaign",
+      "description": "Recruitment campaigns"
+    },
+    "/candidates/{candidateId}": {
+      "schema": "Candidate",
+      "description": "Candidates evaluating or applying in a campaign"
+    },
+    "/auditLogs/{logId}": {
+      "schema": "AuditLog",
+      "description": "Workspace system audit logging tracker"
+    },
+    "/branding/config": {
+      "schema": "Branding",
+      "description": "Custom organizational branding stylesheet and disclaimer configuration document"
+    },
+    "/recruiterNotes/{candidateId}": {
+      "schema": "RecruiterNote",
+      "description": "Recruiter comments for each candidate"
+    }
+  }
+}

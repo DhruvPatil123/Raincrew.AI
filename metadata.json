@@ -1,0 +1,11 @@
+{
+  "name": "Raincrew.AI",
+  "description": "An AI-powered voice interviewer and recruitment platform to screen candidates, conduct interactive browser-based vocal interviews, and generate detailed semantic reports and fit scores using Gemini.",
+  "requestFramePermissions": [
+    "microphone",
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

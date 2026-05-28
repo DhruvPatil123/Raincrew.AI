@@ -1,0 +1,51 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Global Safety Net catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Common helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isEmailVerified() {
+      return isSignedIn() && request.auth.token.email_verified == true;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // --- Campaigns Collection ---
+    match /campaigns/{campaignId} {
+      allow read: if isSignedIn(); // Any authenticated user can view campaigns
+      allow write: if isEmailVerified(); // Only verified users (recruiters) can write/update campaigns
+    }
+
+    // --- Candidates Collection ---
+    match /candidates/{candidateId} {
+      allow read, write: if isSignedIn(); // Standard access for logged in recruiters/systems
+    }
+
+    // --- Audit Logs ---
+    match /auditLogs/{logId} {
+      allow read: if isEmailVerified();
+      allow create: if isSignedIn();
+    }
+
+    // --- Branding Config ---
+    match /branding/{docId} {
+      allow read: if true; // Publicly accessible to render logos/styles before auth
+      allow write: if isEmailVerified();
+    }
+
+    // --- Recruiter Notes ---
+    match /recruiterNotes/{candidateId} {
+      allow read, write: if isEmailVerified();
+    }
+  }
+}
