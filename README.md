@@ -15,7 +15,7 @@
 
 ## 🧭 Project Architecture Overview
 
-FoloUp is built as a unified full-stack application that couples a high-performance **Vite + React 19** frontend with a robust **Node.js Express + WebSocket** backend. It features **Firebase Firestore** as its production database with a local JSON fallback file storage system to guarantee resilient, multi-tenant workspace separation.
+Raincrew.AI is built as a unified full-stack application that couples a high-performance **Vite + React 19** frontend with a robust **Node.js Express + WebSocket** backend. It features **Firebase Firestore** as its production database with a local JSON fallback file storage system to guarantee resilient, multi-tenant workspace separation.
 
 ```mermaid
 graph TD
