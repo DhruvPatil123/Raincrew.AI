@@ -1,6 +1,6 @@
 
   
-  # 🎙️ FoloUp: Next-Gen AI Talent Acquisition & Proctoring Room
+  # 🎙️ Rainctew.AI: Next-Gen AI Talent Acquisition & Proctoring Room
   
   [![Vite](https://img.shields.io/badge/Vite-6.2.3-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vite.dev/)
   [![React](https://img.shields.io/badge/React-19.0.1-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
@@ -8,7 +8,7 @@
   [![Gemini Live API](https://img.shields.io/badge/Gemini_Live-3.1_Flash-orange?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
   [![Firebase Firestore](https://img.shields.io/badge/Firebase_Firestore-12.13.0-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/)
   
-  **FoloUp** is a state-of-the-art, high-fidelity AI-powered recruiting and talent acquisition ecosystem. It modernizes traditional voice screening and technical assessments by utilizing the **Google Gemini Multimodal Live WebSocket API** to conduct real-time oral interviews, combined with a comprehensive **biometric and browser proctoring suite** and a deep-dive **evaluation engine** that renders candidate report scorecards, pacing metrics, gap analyses, and collaborative tools.
+  **Raincrew.AI** is a state-of-the-art, high-fidelity AI-powered recruiting and talent acquisition ecosystem. It modernizes traditional voice screening and technical assessments by utilizing the **Google Gemini Multimodal Live WebSocket API** to conduct real-time oral interviews, combined with a comprehensive **biometric and browser proctoring suite** and a deep-dive **evaluation engine** that renders candidate report scorecards, pacing metrics, gap analyses, and collaborative tools.
 </div>
 
 ---
